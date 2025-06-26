@@ -10,10 +10,10 @@ import (
 func TestGetAPIKey(t *testing.T) {
 	// Define the test cases
 	testCases := []struct {
-		name      string      // The name of the test case
-		headers   http.Header // The http.Header to pass to the function
-		wantKey   string      // The expected API key to be returned
-		wantErr   error       // The expected error to be returned
+		name    string      // The name of the test case
+		headers http.Header // The http.Header to pass to the function
+		wantKey string      // The expected API key to be returned
+		wantErr error       // The expected error to be returned
 	}{
 		{
 			name: "Valid ApiKey header",
@@ -24,7 +24,7 @@ func TestGetAPIKey(t *testing.T) {
 			wantErr: nil,
 		},
 		{
-			name: "No Authorization header",
+			name:    "No Authorization header",
 			headers: http.Header{},
 			wantKey: "",
 			wantErr: ErrNoAuthHeaderIncluded,
@@ -54,8 +54,8 @@ func TestGetAPIKey(t *testing.T) {
 			wantErr: &malformedAuthError{},
 		},
 		{
-			name:      "Empty header value",
-			headers:   http.Header{
+			name: "Empty header value",
+			headers: http.Header{
 				"Authorization": []string{""},
 			},
 			wantKey: "",
@@ -98,4 +98,3 @@ type malformedAuthError struct{}
 func (m *malformedAuthError) Error() string {
 	return "malformed authorization header"
 }
-
