@@ -20,7 +20,7 @@ jobs:
 
       - name: Print Go version
         run: go test ./... -cover
-   styles:
+  styles:
      name: Style
      runs-on: ubuntu-latest
 
