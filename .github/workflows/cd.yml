@@ -20,3 +20,17 @@ jobs:
 
       - name: Build the notely app image
         run: scripts/buildprod.sh
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+
+      - name: 'Use gcloud CLI'
+        run: 'gcloud info'
+
+      - name: Build Google Cloud Provider (GCP) artifact image and submit to Artifact Registry
+      - run: gcloud builds submit --tag us-central1-docker.pkg.dev/notely-464211/notely-ar-repo/notely-app:latest .
